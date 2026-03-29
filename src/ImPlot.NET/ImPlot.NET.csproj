@@ -30,7 +30,7 @@
     <None Remove="build\net40\ImPlot.NET.targets" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(RepositoryRootDirectory)/deps/cimplot.dll" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(RepositoryRootDirectory)/deps/win-x64/cimplot.dll" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine" Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' ">
