@@ -2663,21 +2663,31 @@
   ],
   "ImPlotPlot_destroy": [
     {
-      "args": "(ImPlotPlot* self)",
+      "args": "(ImPlotPlot* self,ImPlotAxis* axis,const char* label)",
       "argsT": [
         {
           "name": "self",
           "type": "ImPlotPlot*"
+        },
+        {
+          "name": "axis",
+          "reftoptr": true,
+          "type": "ImPlotAxis*"
+        },
+        {
+          "name": "label",
+          "type": "const char*"
         }
       ],
-      "call_args": "(self)",
-      "cimguiname": "ImPlotPlot_destroy",
+      "argsoriginal": "(ImPlotAxis& axis,const char* label)",
+      "call_args": "(*axis,label)",
+      "cimguiname": "ImPlotPlot_SetAxisLabel",
       "defaults": {},
       "destructor": true,
       "location": "implot_internal:1063",
       "ov_cimguiname": "ImPlotPlot_destroy",
       "ret": "void",
-      "signature": "(ImPlotPlot*)",
+      "signature": "(ImPlotAxis*,const char*)",
       "stname": "ImPlotPlot"
     }
   ],
@@ -7258,6 +7268,10 @@
           "type": "ImAxis"
         },
         {
+          "name": "x_axis",
+          "type": "ImAxis"
+        },
+        {
           "name": "y_axis",
           "type": "ImAxis"
         }
@@ -7285,6 +7299,10 @@
     {
       "args": "(ImAxis x_axis,ImAxis y_axis)",
       "argsT": [
+        {
+          "name": "x_axis",
+          "type": "ImAxis"
+        },
         {
           "name": "x_axis",
           "type": "ImAxis"
