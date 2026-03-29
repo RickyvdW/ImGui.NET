@@ -4,7 +4,7 @@ namespace ImGuiNET
     public enum ImGuiChildFlags
     {
         None = 0,
-        Border = 1,
+        Borders = 1,
         AlwaysUseWindowPadding = 2,
         ResizeX = 4,
         ResizeY = 8,
@@ -12,5 +12,6 @@ namespace ImGuiNET
         AutoResizeY = 32,
         AlwaysAutoResize = 64,
         FrameStyle = 128,
+        NavFlattened = 256,
     }
 }

@@ -11,5 +11,6 @@ namespace ImPlotNET
         Outside = 16,
         Horizontal = 32,
         Sort = 64,
+        Reverse = 128,
     }
 }

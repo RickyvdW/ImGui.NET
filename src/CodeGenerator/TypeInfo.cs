@@ -23,9 +23,12 @@ namespace CodeGenerator
             { "unsigned short", "ushort" },
             { "unsigned int", "uint" },
             { "ImVec2", "Vector2" },
+            { "ImVec2_c", "Vector2" }, // RICKY: crap?
             { "ImVec2_Simple", "Vector2" },
             { "ImVec3", "Vector3" },
+            { "ImVec3_c", "Vector3" }, // RICKY: crap?
             { "ImVec4", "Vector4" },
+            { "ImVec4_c", "Vector4" }, // RICKY: crap?
             { "ImWchar16", "ushort" }, //char is not blittable
             { "ImVec4_Simple", "Vector4" },
             { "ImColor_Simple", "ImColor" },
@@ -56,6 +59,14 @@ namespace CodeGenerator
             { "ImPlotGetter", "IntPtr" },
             { "ImPlotTransform", "IntPtr" },
             { "ImGuiKeyChord", "ImGuiKey" },
+            { "ImFontAtlasRectId", "int" }, // RICKY: crap?
+            { "ImColor_c", "ImColor" }, // RICKY: crap?
+            { "ImTextureRef_c", "ImTextureRef"},
+            { "ImGuiSelectionUserData", "long" }, // RICKY: crap?
+            { "ImFontAtlasBuilder", "IntPtr" }, // RICKY: crap?
+            { "ImFontLoader", "IntPtr" }, // RICKY: crap?
+            { "ImGuiFreeTypeBuilderFlags", "uint" }, // RICKY: crap?
+            { "ImDrawTextFlags", "int" } // RICKY: crap?
         };
         
         public static readonly List<string> WellKnownEnums = new List<string>()

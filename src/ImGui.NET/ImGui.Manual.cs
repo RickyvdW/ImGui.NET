@@ -6,6 +6,11 @@ using System.Text;
 
 namespace ImGuiNET
 {
+    public struct ImGuiSelectionUserData
+    {
+        public long Value;
+    }
+    
     public static unsafe partial class ImGui
     {
         public static bool InputText(

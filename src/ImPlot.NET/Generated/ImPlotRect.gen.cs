@@ -23,19 +23,17 @@ namespace ImPlotNET
         public ref ImPlotRange Y => ref Unsafe.AsRef<ImPlotRange>(&NativePtr->Y);
         public ImPlotPoint Clamp(ImPlotPoint p)
         {
-            ImPlotPoint __retval;
-            ImPlotNative.ImPlotRect_Clamp_PlotPoInt(&__retval, (ImPlotRect*)(NativePtr), p);
-            return __retval;
+            ImPlotPoint ret = ImPlotNative.ImPlotRect_Clamp_PlotPoint((ImPlotRect*)(NativePtr), p);
+            return ret;
         }
         public ImPlotPoint Clamp(double x, double y)
         {
-            ImPlotPoint __retval;
-            ImPlotNative.ImPlotRect_Clamp_double(&__retval, (ImPlotRect*)(NativePtr), x, y);
-            return __retval;
+            ImPlotPoint ret = ImPlotNative.ImPlotRect_Clamp_double((ImPlotRect*)(NativePtr), x, y);
+            return ret;
         }
         public bool Contains(ImPlotPoint p)
         {
-            byte ret = ImPlotNative.ImPlotRect_Contains_PlotPoInt((ImPlotRect*)(NativePtr), p);
+            byte ret = ImPlotNative.ImPlotRect_Contains_PlotPoint((ImPlotRect*)(NativePtr), p);
             return ret != 0;
         }
         public bool Contains(double x, double y)
@@ -49,21 +47,18 @@ namespace ImPlotNET
         }
         public ImPlotPoint Max()
         {
-            ImPlotPoint __retval;
-            ImPlotNative.ImPlotRect_Max(&__retval, (ImPlotRect*)(NativePtr));
-            return __retval;
+            ImPlotPoint ret = ImPlotNative.ImPlotRect_Max((ImPlotRect*)(NativePtr));
+            return ret;
         }
         public ImPlotPoint Min()
         {
-            ImPlotPoint __retval;
-            ImPlotNative.ImPlotRect_Min(&__retval, (ImPlotRect*)(NativePtr));
-            return __retval;
+            ImPlotPoint ret = ImPlotNative.ImPlotRect_Min((ImPlotRect*)(NativePtr));
+            return ret;
         }
         public ImPlotPoint Size()
         {
-            ImPlotPoint __retval;
-            ImPlotNative.ImPlotRect_Size(&__retval, (ImPlotRect*)(NativePtr));
-            return __retval;
+            ImPlotPoint ret = ImPlotNative.ImPlotRect_Size((ImPlotRect*)(NativePtr));
+            return ret;
         }
     }
 }
