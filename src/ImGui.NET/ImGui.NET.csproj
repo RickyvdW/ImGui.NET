@@ -62,7 +62,7 @@
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine" Condition=" '$(OS)' == 'Windows_NT' ">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>W:\Program Files\Unity\6000.2.8f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
