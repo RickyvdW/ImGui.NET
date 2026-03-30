@@ -83,6 +83,7 @@ namespace CodeGenerator
         public static readonly Dictionary<string, string> AlternateEnumPrefixes = new Dictionary<string, string>()
         {
             { "ImGuiKey", "ImGuiMod" },
+            { "ImGuiDockNodeFlags", "ImGuiDockNodeFlagsPrivate" },
         };
 
         public static readonly Dictionary<string, string> AlternateEnumPrefixSubstitutions = new Dictionary<string, string>()

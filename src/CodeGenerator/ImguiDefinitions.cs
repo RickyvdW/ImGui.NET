@@ -39,8 +39,14 @@ namespace CodeGenerator
             HashSet<string> DockingBranchInternalEnumWhitelist = new HashSet<string>()
             {
                 "ImGuiDockNodeState",
+                "ImGuiDockNodeFlagsPrivate_",
                 "ImGuiAxis",
-            }; 
+            };
+
+            List<(string, string)> DockingBranchMergeEnumList = new List<(string, string)>()
+            {
+                ("ImGuiDockNodeFlags", "ImGuiDockNodeFlagsPrivate")
+            };
                 
             JObject typesJson;
             using (StreamReader fs = File.OpenText(Path.Combine(directory, "structs_and_enums.json")))
@@ -94,6 +100,55 @@ namespace CodeGenerator
                 }).ToArray();
                 return new EnumDefinition(name, elements);
             }).Where(x => x != null).ToArray();
+            
+            // RICKY: Merge enums with separated private & public variants.
+            // RICKY: For now only ImGuiDockNodeFlagsPrivate_ & ImGuiDockNodeFlags.
+            HashSet<EnumDefinition> concatenatedEnums = new HashSet<EnumDefinition>();
+            foreach ((string a, string b) in DockingBranchMergeEnumList)
+            {
+                // Just do a loop, don't feel like optimizing this.
+                EnumDefinition definitionA = null;
+                EnumDefinition definitionB = null;
+                
+                foreach (EnumDefinition definition in Enums)
+                {
+                    if (definitionA != null && definitionB != null)
+                        break;
+                    
+                    if (definitionA == null && definition.FriendlyNames.First() == a)
+                        definitionA = definition;
+                    
+                    if (definitionB == null && definition.FriendlyNames.First() == b)
+                        definitionB = definition;
+                }
+
+                if (definitionA == null | definitionB == null)
+                    continue;
+                
+                // Move all values from B into A.
+                EnumMember[] concatenatedMembers = new EnumMember[definitionA.Members.Length + definitionB.Members.Length];
+                int concatenatedIndex = 0;
+
+                for (int i = 0; i < definitionA.Members.Length; i++)
+                {
+                    concatenatedMembers[concatenatedIndex] = definitionA.Members[i];
+                    concatenatedIndex++;
+                }
+                
+                for (int i = 0; i < definitionB.Members.Length; i++)
+                {
+                    concatenatedMembers[concatenatedIndex] = definitionB.Members[i];
+                    concatenatedIndex++;
+                }
+
+                definitionA.Members = concatenatedMembers;
+                concatenatedEnums.Add(definitionB);
+                
+                // Resanitize the member names otherwise junk is left behind.
+                definitionA.SanitizeMemberNames();
+            }
+            
+            Enums = Enums.Where(e => !concatenatedEnums.Contains(e)).ToArray();
 
             Types = typesJson["structs"].Select(jt =>
             {
@@ -258,7 +313,7 @@ namespace CodeGenerator
 
         public string[] Names { get; }
         public string[] FriendlyNames { get; }
-        public EnumMember[] Members { get; }
+        public EnumMember[] Members { get; set; }
 
         public EnumDefinition(string name, EnumMember[] elements)
         {
@@ -288,7 +343,13 @@ namespace CodeGenerator
             Members = elements;
 
             _sanitizedNames = new Dictionary<string, string>();
-            foreach (EnumMember el in elements)
+            SanitizeMemberNames();
+        }
+
+        public void SanitizeMemberNames()
+        {
+            _sanitizedNames.Clear();
+            foreach (EnumMember el in Members)
             {
                 _sanitizedNames.Add(el.Name, SanitizeMemberName(el.Name));
             }
