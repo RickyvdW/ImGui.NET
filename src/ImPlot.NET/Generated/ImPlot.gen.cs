@@ -1653,42 +1653,40 @@ namespace ImPlotNET
             ImDrawList* ret = ImPlotNative.ImPlot_GetPlotDrawList();
             return new ImDrawListPtr(ret);
         }
-        public static ImPlotRect_c GetPlotLimits()
+        public static ImPlotRect GetPlotLimits()
         {
             ImAxis x_axis = (ImAxis)(-1);
+            ImAxis y_axis = (ImAxis)(-1);
+            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
+            return ret;
+        }
+        public static ImPlotRect GetPlotLimits(ImAxis x_axis)
+        {
+            ImAxis y_axis = (ImAxis)(-1);
+            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
+            return ret;
+        }
+        public static ImPlotRect GetPlotLimits(ImAxis x_axis, ImAxis y_axis)
+        {
+            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
+            return ret;
+        }
+        public static ImPlotPoint GetPlotMousePos()
+        {
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect_c ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_GetPlotMousePos(x_axis, y_axis);
             return ret;
         }
-        public static ImPlotRect_c GetPlotLimits(ImAxis x_axis, ImAxis x_axis)
+        public static ImPlotPoint GetPlotMousePos(ImAxis x_axis)
         {
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect_c ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_GetPlotMousePos(x_axis, y_axis);
             return ret;
         }
-        public static ImPlotRect_c GetPlotLimits(ImAxis x_axis, ImAxis x_axis, ImAxis y_axis)
+        public static ImPlotPoint GetPlotMousePos(ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotRect_c ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, x_axis, y_axis);
-            return ret;
-        }
-        public static ImPlotPoint_c GetPlotMousePos()
-        {
-            ImAxis x_axis = (ImAxis)(-1);
-            ImAxis x_axis = (ImAxis)(-1);
-            ImAxis y_axis = (ImAxis)(-1);
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_GetPlotMousePos(x_axis, x_axis, y_axis);
-            return ret;
-        }
-        public static ImPlotPoint_c GetPlotMousePos(ImAxis x_axis, ImAxis x_axis)
-        {
-            ImAxis y_axis = (ImAxis)(-1);
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_GetPlotMousePos(x_axis, x_axis, y_axis);
-            return ret;
-        }
-        public static ImPlotPoint_c GetPlotMousePos(ImAxis x_axis, ImAxis x_axis, ImAxis y_axis)
-        {
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_GetPlotMousePos(x_axis, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_GetPlotMousePos(x_axis, y_axis);
             return ret;
         }
         public static Vector2 GetPlotPos()
@@ -1696,22 +1694,22 @@ namespace ImPlotNET
             Vector2 ret = ImPlotNative.ImPlot_GetPlotPos();
             return ret;
         }
-        public static ImPlotRect_c GetPlotSelection()
+        public static ImPlotRect GetPlotSelection()
         {
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect_c ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
+            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
             return ret;
         }
-        public static ImPlotRect_c GetPlotSelection(ImAxis x_axis)
+        public static ImPlotRect GetPlotSelection(ImAxis x_axis)
         {
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect_c ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
+            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
             return ret;
         }
-        public static ImPlotRect_c GetPlotSelection(ImAxis x_axis, ImAxis y_axis)
+        public static ImPlotRect GetPlotSelection(ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotRect_c ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
+            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
             return ret;
         }
         public static Vector2 GetPlotSize()
@@ -1826,40 +1824,40 @@ namespace ImPlotNET
             Vector4 ret = ImPlotNative.ImPlot_NextColormapColor();
             return ret;
         }
-        public static ImPlotPoint_c PixelsToPlot(Vector2 pix)
+        public static ImPlotPoint PixelsToPlot(Vector2 pix)
         {
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_PixelsToPlot_Vec2(pix, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_PixelsToPlot_Vec2(pix, x_axis, y_axis);
             return ret;
         }
-        public static ImPlotPoint_c PixelsToPlot(Vector2 pix, ImAxis x_axis)
+        public static ImPlotPoint PixelsToPlot(Vector2 pix, ImAxis x_axis)
         {
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_PixelsToPlot_Vec2(pix, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_PixelsToPlot_Vec2(pix, x_axis, y_axis);
             return ret;
         }
-        public static ImPlotPoint_c PixelsToPlot(Vector2 pix, ImAxis x_axis, ImAxis y_axis)
+        public static ImPlotPoint PixelsToPlot(Vector2 pix, ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_PixelsToPlot_Vec2(pix, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_PixelsToPlot_Vec2(pix, x_axis, y_axis);
             return ret;
         }
-        public static ImPlotPoint_c PixelsToPlot(float x, float y)
+        public static ImPlotPoint PixelsToPlot(float x, float y)
         {
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_PixelsToPlot_Float(x, y, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_PixelsToPlot_Float(x, y, x_axis, y_axis);
             return ret;
         }
-        public static ImPlotPoint_c PixelsToPlot(float x, float y, ImAxis x_axis)
+        public static ImPlotPoint PixelsToPlot(float x, float y, ImAxis x_axis)
         {
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_PixelsToPlot_Float(x, y, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_PixelsToPlot_Float(x, y, x_axis, y_axis);
             return ret;
         }
-        public static ImPlotPoint_c PixelsToPlot(float x, float y, ImAxis x_axis, ImAxis y_axis)
+        public static ImPlotPoint PixelsToPlot(float x, float y, ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotPoint_c ret = ImPlotNative.ImPlot_PixelsToPlot_Float(x, y, x_axis, y_axis);
+            ImPlotPoint ret = ImPlotNative.ImPlot_PixelsToPlot_Float(x, y, x_axis, y_axis);
             return ret;
         }
         public static void PlotBarGroups(string[] label_ids, ref float values, int item_count, int group_count)

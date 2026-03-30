@@ -388,9 +388,9 @@ namespace ImGuiNET.SampleProgram.XNA
 						continue;
 					}
 
-					if (!_loadedTextures.ContainsKey(drawCmd.TextureId))
+					if (!_loadedTextures.ContainsKey(drawCmd.GetTexID()))
 					{
-						throw new InvalidOperationException($"Could not find a texture with id '{drawCmd.TextureId}', please check your bindings");
+						throw new InvalidOperationException($"Could not find a texture with id '{drawCmd.GetTexID()}', please check your bindings");
 					}
 
 					_graphicsDevice.ScissorRectangle = new Rectangle(
@@ -400,7 +400,7 @@ namespace ImGuiNET.SampleProgram.XNA
 						(int)(drawCmd.ClipRect.w - drawCmd.ClipRect.y)
 					);
 
-					var effect = UpdateEffect(_loadedTextures[drawCmd.TextureId]);
+					var effect = UpdateEffect(_loadedTextures[drawCmd.GetTexID()]);
 
 					foreach (var pass in effect.CurrentTechnique.Passes)
 					{

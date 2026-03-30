@@ -66,7 +66,13 @@ namespace CodeGenerator
             { "ImFontAtlasBuilder", "IntPtr" }, // RICKY: crap?
             { "ImFontLoader", "IntPtr" }, // RICKY: crap?
             { "ImGuiFreeTypeBuilderFlags", "uint" }, // RICKY: crap?
-            { "ImDrawTextFlags", "int" } // RICKY: crap?
+            { "ImDrawTextFlags", "int" }, // RICKY: crap?
+            { "ImPlotRect_c", "ImPlotRect" },
+            { "ImPlotPoint_c", "ImPlotPoint" },
+            { "ImGuiDataAuthority", "int" },
+            { "ImGuiDockNode*", "ImGuiDockNodePtr" },
+            { "ImGuiTabBar*", "IntPtr" },
+            { "ImGuiWindow*", "IntPtr" },
         };
         
         public static readonly List<string> WellKnownEnums = new List<string>()

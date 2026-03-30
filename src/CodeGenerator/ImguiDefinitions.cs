@@ -24,7 +24,24 @@ namespace CodeGenerator
         }
         public void LoadFrom(string directory)
         {
+            // RICKY: Need this to code-gen for docking branch stuff. Marked as imgui:internal and I don't want to 
+            // mess with the Lua scripts tbh.
+            HashSet<string> DockingBranchInternalStructWhitelist = new HashSet<string>()
+            {
+                "ImGuiDockNode",
+                "ImGuiDockNodeFlags",
+                "ImGuiDockNodeSettings",
+                "ImGuiDockRequest",
+                "ImGuiTabBar",
+                "ImGuiWindow",
+            }; 
             
+            HashSet<string> DockingBranchInternalEnumWhitelist = new HashSet<string>()
+            {
+                "ImGuiDockNodeState",
+                "ImGuiAxis",
+            }; 
+                
             JObject typesJson;
             using (StreamReader fs = File.OpenText(Path.Combine(directory, "structs_and_enums.json")))
             using (JsonTextReader jr = new JsonTextReader(fs))
@@ -66,8 +83,10 @@ namespace CodeGenerator
             {
                 JProperty jp = (JProperty)jt;
                 string name = jp.Name;
-                if (typeLocations?[jp.Name]?.Value<string>().Contains("internal") ?? false) {
-                    return null;
+                if (typeLocations?[jp.Name]?.Value<string>().Contains("internal") ?? false) 
+                {
+                    if (!DockingBranchInternalEnumWhitelist.Contains(name))
+                        return null;
                 }
                 EnumMember[] elements = jp.Values().Select(v =>
                 {
@@ -80,14 +99,16 @@ namespace CodeGenerator
             {
                 JProperty jp = (JProperty)jt;
                 string name = jp.Name;
-                if (typeLocations?[jp.Name]?.Value<string>().Contains("internal") ?? false) {
-                    return null;
+                if (typeLocations?[jp.Name]?.Value<string>().Contains("internal") ?? false) 
+                {
+                    // RICKY: Check if this struct is white-listed on the docking branch. 
+                    if (!DockingBranchInternalStructWhitelist.Contains(name))
+                        return null;
                 }
+                
                 TypeReference[] fields = jp.Values().Select(v =>
                 {
                     if (v["type"].ToString().Contains("static")) { return null; }
-
-                    
                     return new TypeReference(
                         v["name"].ToString(),
                         v["type"].ToString(),
@@ -121,7 +142,13 @@ namespace CodeGenerator
                         }
                     }
                     if (friendlyName == null) { return null; }
-                    if (val["location"]?.ToString().Contains("internal") ?? false) return null;
+
+                    if (val["location"]?.ToString().Contains("internal") ?? false)
+                    {
+                        // RICKY: Whitelist for docking branch.
+                        if (!friendlyName.Contains("DockBuilder"))
+                            return null;
+                    }
 
                     string exportedName = ov_cimguiname;
                     if (exportedName == null)

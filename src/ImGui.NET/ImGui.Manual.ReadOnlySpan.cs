@@ -389,7 +389,38 @@ namespace ImGuiNET
             bool hideTextAfterDoubleHash = false,
             float wrapWidth = -1.0f)
         {
-            return CalcTextSize(text.Slice(start, length ?? text.Length-start), hideTextAfterDoubleHash, wrapWidth);
+            return CalcTextSizeImpl(text.Slice(start, length ?? text.Length-start), hideTextAfterDoubleHash, wrapWidth);
+        }
+        
+        public static Vector2 CalcTextSizeImpl(ReadOnlySpan<char> text, bool hideTextAfterDoubleHash, float wrapWidth)
+        {
+            byte* native_text;
+            int text_byteCount = 0;
+            if (text != null)
+            {
+                text_byteCount = Encoding.UTF8.GetByteCount(text);
+                if (text_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text = Util.Allocate(text_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_stackBytes = stackalloc byte[text_byteCount + 1];
+                    native_text = native_text_stackBytes;
+                }
+                int native_text_offset = Util.GetUtf8(text, native_text, text_byteCount);
+                native_text[native_text_offset] = 0;
+            }
+            else { native_text = null; }
+            byte* native_text_end = null;
+            byte hide_text_after_double_hash = hideTextAfterDoubleHash ? (byte)1 : (byte)0;
+            float wrap_width = wrapWidth;
+            Vector2 ret = ImGuiNative.igCalcTextSize(native_text, native_text_end, hide_text_after_double_hash, wrap_width);
+            if (text_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text);
+            }
+            return ret;
         }
 
         public static bool InputText(
@@ -479,6 +510,58 @@ namespace ImGuiNET
         public static bool MenuItem(ReadOnlySpan<char> label, bool enabled)
         {
             return MenuItem(label, string.Empty, false, enabled);
+        }
+        
+        public static bool MenuItem(ReadOnlySpan<char> label, string shortcut, bool selected, bool enabled)
+        {
+            byte* native_label;
+            int label_byteCount = 0;
+            if (label != null)
+            {
+                label_byteCount = Encoding.UTF8.GetByteCount(label);
+                if (label_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_label = Util.Allocate(label_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_label_stackBytes = stackalloc byte[label_byteCount + 1];
+                    native_label = native_label_stackBytes;
+                }
+                int native_label_offset = Util.GetUtf8(label, native_label, label_byteCount);
+                native_label[native_label_offset] = 0;
+            }
+            else { native_label = null; }
+            byte* native_shortcut;
+            int shortcut_byteCount = 0;
+            if (shortcut != null)
+            {
+                shortcut_byteCount = Encoding.UTF8.GetByteCount(shortcut);
+                if (shortcut_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_shortcut = Util.Allocate(shortcut_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_shortcut_stackBytes = stackalloc byte[shortcut_byteCount + 1];
+                    native_shortcut = native_shortcut_stackBytes;
+                }
+                int native_shortcut_offset = Util.GetUtf8(shortcut, native_shortcut, shortcut_byteCount);
+                native_shortcut[native_shortcut_offset] = 0;
+            }
+            else { native_shortcut = null; }
+            byte native_selected = selected ? (byte)1 : (byte)0;
+            byte native_enabled = enabled ? (byte)1 : (byte)0;
+            byte ret = ImGuiNative.igMenuItem_Bool(native_label, native_shortcut, native_selected, native_enabled);
+            if (label_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_label);
+            }
+            if (shortcut_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_shortcut);
+            }
+            return ret != 0;
         }
     }
 }

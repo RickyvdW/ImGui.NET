@@ -752,13 +752,13 @@ namespace ImPlotNET
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern double ImPlotRange_Size(ImPlotRange* self);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ImPlotPoint ImPlotRect_Clamp_PlotPoint(ImPlotRect* self, ImPlotPoint p);
+        public static extern ImPlotPoint ImPlotRectlamp_PlotPoint(ImPlotRect* self, ImPlotPoint p);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ImPlotPoint ImPlotRect_Clamp_double(ImPlotRect* self, double x, double y);
+        public static extern ImPlotPoint ImPlotRectlamp_double(ImPlotRect* self, double x, double y);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImPlotRect_Contains_PlotPoint(ImPlotRect* self, ImPlotPoint p);
+        public static extern byte ImPlotRectontains_PlotPoint(ImPlotRect* self, ImPlotPoint p);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImPlotRect_Contains_double(ImPlotRect* self, double x, double y);
+        public static extern byte ImPlotRectontains_double(ImPlotRect* self, double x, double y);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlotRect_destroy(ImPlotRect* self);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]

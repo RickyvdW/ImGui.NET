@@ -1,0 +1,105 @@
+using System;
+using UnityEngine;
+using System.Runtime.CompilerServices;
+using System.Text;
+
+namespace ImGuiNET
+{
+    public unsafe partial struct ImGuiDockNode
+    {
+        public uint ID;
+        public ImGuiDockNodeFlags SharedFlags;
+        public ImGuiDockNodeFlags LocalFlags;
+        public ImGuiDockNodeFlags LocalFlagsInWindows;
+        public ImGuiDockNodeFlags MergedFlags;
+        public ImGuiDockNodeState State;
+        public ImGuiDockNodePtr ParentNode;
+        public ImGuiDockNodePtr ChildNodes_0;
+        public ImGuiDockNodePtr ChildNodes_1;
+        public ImVector Windows;
+        public IntPtr TabBar;
+        public Vector2 Pos;
+        public Vector2 Size;
+        public Vector2 SizeRef;
+        public ImGuiAxis SplitAxis;
+        public ImGuiWindowClass WindowClass;
+        public uint LastBgColor;
+        public IntPtr HostWindow;
+        public IntPtr VisibleWindow;
+        public ImGuiDockNodePtr CentralNode;
+        public ImGuiDockNodePtr OnlyNodeWithWindows;
+        public int CountNodeWithWindows;
+        public int LastFrameAlive;
+        public int LastFrameActive;
+        public int LastFrameFocused;
+        public uint LastFocusedNodeId;
+        public uint SelectedTabId;
+        public uint WantCloseTabId;
+        public uint RefViewportId;
+        public int AuthorityForPos;
+        public int AuthorityForSize;
+        public int AuthorityForViewport;
+        public byte IsVisible;
+        public byte IsFocused;
+        public byte IsBgDrawnThisFrame;
+        public byte HasCloseButton;
+        public byte HasWindowMenuButton;
+        public byte HasCentralNodeChild;
+        public byte WantCloseAll;
+        public byte WantLockSizeOnce;
+        public byte WantMouseMove;
+        public byte WantHiddenTabBarUpdate;
+        public byte WantHiddenTabBarToggle;
+    }
+    public unsafe partial struct ImGuiDockNodePtr
+    {
+        public ImGuiDockNode* NativePtr { get; }
+        public ImGuiDockNodePtr(ImGuiDockNode* nativePtr) => NativePtr = nativePtr;
+        public ImGuiDockNodePtr(IntPtr nativePtr) => NativePtr = (ImGuiDockNode*)nativePtr;
+        public static implicit operator ImGuiDockNodePtr(ImGuiDockNode* nativePtr) => new ImGuiDockNodePtr(nativePtr);
+        public static implicit operator ImGuiDockNode* (ImGuiDockNodePtr wrappedPtr) => wrappedPtr.NativePtr;
+        public static implicit operator ImGuiDockNodePtr(IntPtr nativePtr) => new ImGuiDockNodePtr(nativePtr);
+        public ref uint ID => ref Unsafe.AsRef<uint>(&NativePtr->ID);
+        public ref ImGuiDockNodeFlags SharedFlags => ref Unsafe.AsRef<ImGuiDockNodeFlags>(&NativePtr->SharedFlags);
+        public ref ImGuiDockNodeFlags LocalFlags => ref Unsafe.AsRef<ImGuiDockNodeFlags>(&NativePtr->LocalFlags);
+        public ref ImGuiDockNodeFlags LocalFlagsInWindows => ref Unsafe.AsRef<ImGuiDockNodeFlags>(&NativePtr->LocalFlagsInWindows);
+        public ref ImGuiDockNodeFlags MergedFlags => ref Unsafe.AsRef<ImGuiDockNodeFlags>(&NativePtr->MergedFlags);
+        public ref ImGuiDockNodeState State => ref Unsafe.AsRef<ImGuiDockNodeState>(&NativePtr->State);
+        public ref ImGuiDockNodePtr ParentNode => ref Unsafe.AsRef<ImGuiDockNodePtr>(&NativePtr->ParentNode);
+        public RangeAccessor<ImGuiDockNodePtr> ChildNodes => new RangeAccessor<ImGuiDockNodePtr>(&NativePtr->ChildNodes_0, 2);
+        public ImVector<IntPtr> Windows => new ImVector<IntPtr>(NativePtr->Windows);
+        public ref IntPtr TabBar => ref Unsafe.AsRef<IntPtr>(&NativePtr->TabBar);
+        public ref Vector2 Pos => ref Unsafe.AsRef<Vector2>(&NativePtr->Pos);
+        public ref Vector2 Size => ref Unsafe.AsRef<Vector2>(&NativePtr->Size);
+        public ref Vector2 SizeRef => ref Unsafe.AsRef<Vector2>(&NativePtr->SizeRef);
+        public ref ImGuiAxis SplitAxis => ref Unsafe.AsRef<ImGuiAxis>(&NativePtr->SplitAxis);
+        public ref ImGuiWindowClass WindowClass => ref Unsafe.AsRef<ImGuiWindowClass>(&NativePtr->WindowClass);
+        public ref uint LastBgColor => ref Unsafe.AsRef<uint>(&NativePtr->LastBgColor);
+        public ref IntPtr HostWindow => ref Unsafe.AsRef<IntPtr>(&NativePtr->HostWindow);
+        public ref IntPtr VisibleWindow => ref Unsafe.AsRef<IntPtr>(&NativePtr->VisibleWindow);
+        public ref ImGuiDockNodePtr CentralNode => ref Unsafe.AsRef<ImGuiDockNodePtr>(&NativePtr->CentralNode);
+        public ref ImGuiDockNodePtr OnlyNodeWithWindows => ref Unsafe.AsRef<ImGuiDockNodePtr>(&NativePtr->OnlyNodeWithWindows);
+        public ref int CountNodeWithWindows => ref Unsafe.AsRef<int>(&NativePtr->CountNodeWithWindows);
+        public ref int LastFrameAlive => ref Unsafe.AsRef<int>(&NativePtr->LastFrameAlive);
+        public ref int LastFrameActive => ref Unsafe.AsRef<int>(&NativePtr->LastFrameActive);
+        public ref int LastFrameFocused => ref Unsafe.AsRef<int>(&NativePtr->LastFrameFocused);
+        public ref uint LastFocusedNodeId => ref Unsafe.AsRef<uint>(&NativePtr->LastFocusedNodeId);
+        public ref uint SelectedTabId => ref Unsafe.AsRef<uint>(&NativePtr->SelectedTabId);
+        public ref uint WantCloseTabId => ref Unsafe.AsRef<uint>(&NativePtr->WantCloseTabId);
+        public ref uint RefViewportId => ref Unsafe.AsRef<uint>(&NativePtr->RefViewportId);
+        public ref int AuthorityForPos => ref Unsafe.AsRef<int>(&NativePtr->AuthorityForPos);
+        public ref int AuthorityForSize => ref Unsafe.AsRef<int>(&NativePtr->AuthorityForSize);
+        public ref int AuthorityForViewport => ref Unsafe.AsRef<int>(&NativePtr->AuthorityForViewport);
+        public ref bool IsVisible => ref Unsafe.AsRef<bool>(&NativePtr->IsVisible);
+        public ref bool IsFocused => ref Unsafe.AsRef<bool>(&NativePtr->IsFocused);
+        public ref bool IsBgDrawnThisFrame => ref Unsafe.AsRef<bool>(&NativePtr->IsBgDrawnThisFrame);
+        public ref bool HasCloseButton => ref Unsafe.AsRef<bool>(&NativePtr->HasCloseButton);
+        public ref bool HasWindowMenuButton => ref Unsafe.AsRef<bool>(&NativePtr->HasWindowMenuButton);
+        public ref bool HasCentralNodeChild => ref Unsafe.AsRef<bool>(&NativePtr->HasCentralNodeChild);
+        public ref bool WantCloseAll => ref Unsafe.AsRef<bool>(&NativePtr->WantCloseAll);
+        public ref bool WantLockSizeOnce => ref Unsafe.AsRef<bool>(&NativePtr->WantLockSizeOnce);
+        public ref bool WantMouseMove => ref Unsafe.AsRef<bool>(&NativePtr->WantMouseMove);
+        public ref bool WantHiddenTabBarUpdate => ref Unsafe.AsRef<bool>(&NativePtr->WantHiddenTabBarUpdate);
+        public ref bool WantHiddenTabBarToggle => ref Unsafe.AsRef<bool>(&NativePtr->WantHiddenTabBarToggle);
+    }
+}

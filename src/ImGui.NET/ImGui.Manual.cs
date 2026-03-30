@@ -391,7 +391,38 @@ namespace ImGuiNET
             bool hideTextAfterDoubleHash = false,
             float wrapWidth = -1.0f)
         {
-            return CalcTextSize(text.Substring(start, length ?? text.Length-start), hideTextAfterDoubleHash, wrapWidth);
+            return CalcTextSizeImpl(text.Substring(start, length ?? text.Length - start), hideTextAfterDoubleHash, wrapWidth);
+        }
+        
+        public static Vector2 CalcTextSizeImpl(string text, bool hideTextAfterDoubleHash, float wrapWidth)
+        {
+            byte* native_text;
+            int text_byteCount = 0;
+            if (text != null)
+            {
+                text_byteCount = Encoding.UTF8.GetByteCount(text);
+                if (text_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text = Util.Allocate(text_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_stackBytes = stackalloc byte[text_byteCount + 1];
+                    native_text = native_text_stackBytes;
+                }
+                int native_text_offset = Util.GetUtf8(text, native_text, text_byteCount);
+                native_text[native_text_offset] = 0;
+            }
+            else { native_text = null; }
+            byte* native_text_end = null;
+            byte hide_text_after_double_hash = hideTextAfterDoubleHash ? (byte)1 : (byte)0;
+            float wrap_width = wrapWidth;
+            Vector2 ret = ImGuiNative.igCalcTextSize(native_text, native_text_end, hide_text_after_double_hash, wrap_width);
+            if (text_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text);
+            }
+            return ret;
         }
 
         public static bool InputText(

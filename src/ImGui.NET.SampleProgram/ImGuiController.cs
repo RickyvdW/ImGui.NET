@@ -524,15 +524,15 @@ namespace ImGuiNET
 					}
 					else
 					{
-						if (pcmd.TextureId != IntPtr.Zero)
+						if (pcmd.TexRef._TexID != IntPtr.Zero)
 						{
-							if (pcmd.TextureId == _fontAtlasID)
+							if (pcmd.TexRef._TexID == _fontAtlasID)
 							{
 								cl.SetGraphicsResourceSet(1, _fontTextureResourceSet);
 							}
 							else
 							{
-								cl.SetGraphicsResourceSet(1, GetImageResourceSet(pcmd.TextureId));
+								cl.SetGraphicsResourceSet(1, GetImageResourceSet(pcmd.TexRef._TexID));
 							}
 						}
 
