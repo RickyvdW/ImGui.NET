@@ -260,3 +260,4 @@ Session.vim
 
 # VS Launch
 launchSettings.json
+deps/win-x64/ImGui.NET.dll
